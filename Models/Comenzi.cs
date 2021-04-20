@@ -16,6 +16,8 @@
         public int IdSector { get; set; }
         
         public string Line { get; set; }
+
+        public int Cantitate { get; set; }
     }
 
 }
