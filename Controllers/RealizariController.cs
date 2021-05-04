@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SmartB.API.Contracts.Services;
+using SmartB.API.Entities;
 using SmartB.API.Filters.Realizari;
 using SmartB.API.Models;
 
@@ -88,10 +89,7 @@ namespace SmartB.API.Controllers
             await _realizariRepository.GetJobAsync(jobEntity.Id);
             return CreatedAtRoute(nameof(RealizariController.GetJob), new { id = jobEntity.Id}, jobEntity);
         }
-
-
-
-
+        
         [HttpGet]
         [Route("date")]
         public async Task<IActionResult> GetServerDateTime()
