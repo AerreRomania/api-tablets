@@ -18,7 +18,7 @@ namespace SmartB.API.Entities
         public int IdComanda { get; set; }
 
         public int IdOperatie { get; set; }
-
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime Creat { get; set; }
 
         public int Cantitate { get; set; }

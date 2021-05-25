@@ -86,7 +86,7 @@ namespace SmartB.API.Controllers
             var jobEntity = _mapper.Map<Entities.Realizari>(job);
             _realizariRepository.AddJob(jobEntity);
             await _realizariRepository.SaveChangesAsync();
-            await _realizariRepository.GetJobAsync(jobEntity.Id);
+            //await _realizariRepository.GetJobAsync(jobEntity.Id);
             return CreatedAtRoute(nameof(RealizariController.GetJob), new { id = jobEntity.Id}, jobEntity);
         }
         

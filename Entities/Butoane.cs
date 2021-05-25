@@ -15,6 +15,7 @@ namespace SmartB.API.Entities
 
         public bool Buton { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime Data { get; set; }
 
         public int IdRealizare { get; set; }

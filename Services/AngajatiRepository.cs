@@ -31,7 +31,6 @@ namespace SmartB.API.Services
         public async Task<bool> GetManagerAsync(string pin)
         {
             Angajati employee = await _context.Angajatis.FirstOrDefaultAsync(a => a.CodAngajat == pin);
-
             if (employee == null)
                 return false;
             else if (employee.Mansione == "CAPO LINEA")

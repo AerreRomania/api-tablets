@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartB.API.Models
 {
@@ -13,7 +14,6 @@ namespace SmartB.API.Models
         public int IdComanda { get; set; }
 
         public int IdOperatie { get; set; }
-
         public DateTime Creat { get; set; }
 
         public int Cantitate { get; set; }

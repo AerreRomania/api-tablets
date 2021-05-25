@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using SmartB.API.Contexts;
 using SmartB.API.Contracts.Services;
+using SmartB.API.MiddleWare;
 using SmartB.API.Services;
 
 namespace SmartB.API
@@ -79,7 +80,7 @@ namespace SmartB.API
             //        });
             //    });
             //}
-
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
             app.UseHttpsRedirection();
             app.UseMvc();
         }

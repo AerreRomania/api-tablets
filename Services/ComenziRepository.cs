@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using NLog;
 using SmartB.API.Contexts;
 using SmartB.API.Contracts.Services;
 using SmartB.API.Entities;
-
 namespace SmartB.API.Services
 {
     public class ComenziRepository : IComenziRepository, IDisposable
     {
         private AppDbContext _context;
-
+      
         public ComenziRepository(AppDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));

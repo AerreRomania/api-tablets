@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartB.API.Models
 {
@@ -7,7 +8,7 @@ namespace SmartB.API.Models
         public int Adresa { get; set; }
 
         public bool Buton { get; set; }
-
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime Data { get; set; }
 
         public int IdRealizare { get; set; }

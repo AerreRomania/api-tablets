@@ -43,8 +43,8 @@ namespace SmartB.API.Controllers
 
             _butoaneRepository.AddClick(clickEntity);
             await _butoaneRepository.SaveChangesAsync();
-            await _butoaneRepository.GetClickAsync(clickEntity.Id);
-            return CreatedAtRoute("GetClick", new {clickEntity.Id}, clickEntity);
+            //await _butoaneRepository.GetClickAsync(clickEntity.Id);
+            return Ok();//CreatedAtRoute("GetClick", new {clickEntity.Id}, clickEntity);
         }
     }
 }

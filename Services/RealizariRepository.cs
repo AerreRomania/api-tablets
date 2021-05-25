@@ -37,24 +37,24 @@ namespace SmartB.API.Services
 
         public async Task<int> GetProducedPiecesAsync(int orderId, int operationId)
         {
-                          return await (from jobs in _context.Realizari
-                                        join pieces in _context.Butoane on jobs.Id equals pieces.IdRealizare
-                                        join orders in _context.Comenzis on jobs.IdComanda equals orders.Id
-                                        join articles in _context.Articoles on orders.IdArticol equals articles.Id
-                                        join articleOperations in _context.OperatiiArticols on
-                                        new { IdArticol = articles.Id, jobs.IdOperatie } equals
-                                        new { articleOperations.IdArticol, articleOperations.IdOperatie }
-                                        where jobs.IdComanda == orderId &&
-                                              jobs.IdOperatie == operationId &&
-                                              jobs.Creat.Day == DateTime.Now.Day &&
-                                              jobs.Creat.Month == DateTime.Now.Month &&
-                                              jobs.Creat.Year == DateTime.Now.Year
-                                        select new Models.JobPieces
-                                        {
-                                            Order = orders.NrComanda,
-                                            Click = pieces.Id,
-                                            Value = articleOperations.BucatiButon
-                                        }).SumAsync(x => x.Value);
+            DateTime start = DateTime.Now.Date;
+            DateTime end = start.AddDays(1);
+            return await (from jobs in _context.Realizari
+                          join pieces in _context.Butoane on jobs.Id equals pieces.IdRealizare
+                          join orders in _context.Comenzis on jobs.IdComanda equals orders.Id
+                          join articleOperations in _context.OperatiiArticols on
+                          new { IdArticol = orders.IdArticol, jobs.IdOperatie } equals
+                          new { articleOperations.IdArticol, articleOperations.IdOperatie }
+                          where jobs.IdComanda == orderId &&
+                                jobs.IdOperatie == operationId &&
+                                jobs.Creat >= start && jobs.Creat < end
+                          //jobs.Creat.Day == DateTime.Now.Day &&
+                          //jobs.Creat.Month == DateTime.Now.Month &&
+                          //jobs.Creat.Year == DateTime.Now.Year
+                          select new
+                          {
+                              Value = articleOperations.BucatiButon
+                          }).SumAsync(x => x.Value);
         }
 
         public void UpdateJob(Realizari job)
@@ -65,7 +65,7 @@ namespace SmartB.API.Services
         public async Task<DateTime> GetLastClickAsync(int jobId)
         {
             var userData = await _context.Butoane.Where(a => a.IdRealizare.Equals(jobId)).ToListAsync();
-            return userData.Count == 0 ? new DateTime(2011, 11, 11) : userData.LastOrDefault().Data;
+            return (DateTime)(userData.Count == 0 ? new DateTime(2011, 11, 11) : userData.LastOrDefault().Data);
         }
 
         public async Task<DateTime> GetServerTimeAsync()
