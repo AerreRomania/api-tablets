@@ -14,6 +14,7 @@ namespace SmartB.API.Services
         public ButoaneRepository(AppDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            
         }
 
 

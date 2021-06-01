@@ -75,7 +75,7 @@ namespace SmartB.API.Controllers
 
             _mapper.Map(machineForUpdate, machineEntity);
 
-            _masiniRepository.UpdateMachine(machineEntity);
+          //  _masiniRepository.UpdateMachine(machineEntity);
 
             if (!await _masiniRepository.SaveChangesAsync())
             {

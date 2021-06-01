@@ -18,6 +18,7 @@ namespace SmartB.API.Services
         public RealizariRepository(AppDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            
         }
 
         public async Task<Realizari> GetJobAsync(int id)
@@ -39,10 +40,10 @@ namespace SmartB.API.Services
         {
             DateTime start = DateTime.Now.Date;
             DateTime end = start.AddDays(1);
-            return await (from jobs in _context.Realizari
-                          join pieces in _context.Butoane on jobs.Id equals pieces.IdRealizare
-                          join orders in _context.Comenzis on jobs.IdComanda equals orders.Id
-                          join articleOperations in _context.OperatiiArticols on
+            return await (from jobs in _context.Realizari.AsNoTracking()
+                          join pieces in _context.Butoane.AsNoTracking() on jobs.Id equals pieces.IdRealizare
+                          join orders in _context.Comenzis.AsNoTracking() on jobs.IdComanda equals orders.Id
+                          join articleOperations in _context.OperatiiArticols.AsNoTracking() on
                           new { IdArticol = orders.IdArticol, jobs.IdOperatie } equals
                           new { articleOperations.IdArticol, articleOperations.IdOperatie }
                           where jobs.IdComanda == orderId &&
