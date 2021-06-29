@@ -18,7 +18,7 @@ namespace SmartB.API.Entities
 
         public double? CostProductie { get; set; }
 
-        public int IdStagiune { get; set; }
+        public int? IdStagiune { get; set; }
 
         [StringLength(50)]
         public string Finete { get; set; }
@@ -30,7 +30,7 @@ namespace SmartB.API.Entities
         public double? Centes { get; set; }
 
         [StringLength(50)]
-        public string Stagione { get; set; }
+        public string? Stagione { get; set; }
 
         public bool Active { get; set; }
 
